@@ -4,7 +4,7 @@ from typing import Callable
 
 # scans through the text for all real numbers with a decimal point and returns a generator float value 
 def generator_numbers(text_to_scan: str):
-    pattern = r"[ ]\d+[,.]\d\d[ ]"
+    pattern = r"\d+[,.]?\d+"
     salaries = findall(pattern, text_to_scan)
     for salary in salaries:
         salary = float(salary.strip())

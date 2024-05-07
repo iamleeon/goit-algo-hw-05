@@ -25,7 +25,7 @@ def parse_log_line(line: str) -> dict:
         return line_dict
     except Exception as e:
         print(f"Parsing a log file failed. Error: {e}")
-        # return None
+        return None
 
 
 def load_logs(file_path: str) -> list:
@@ -38,7 +38,7 @@ def load_logs(file_path: str) -> list:
             return logs_list
     except Exception as e:
         print(f"Loading logs failed. Error: {e}")
-        # return None
+        return None
 
 
 def filter_logs_by_level(logs: list, level: str) -> list:
@@ -48,7 +48,7 @@ def filter_logs_by_level(logs: list, level: str) -> list:
         return filtered_logs
     except Exception as e:
         print(f"Filtering logs by level failed. Error: {e}")
-        # return None
+        return None
 
 
 def count_logs_by_level(logs: list) -> dict:
@@ -58,7 +58,7 @@ def count_logs_by_level(logs: list) -> dict:
         return levels_count_dict
     except Exception as e:
         print(f"Counting logs by level failed. Error: {e}")
-        # return None
+        return None
 
 
 def display_log_counts(counts: dict):
@@ -70,13 +70,13 @@ def display_log_counts(counts: dict):
     info_title = f"{"INFO":<15} | {counts["INFO"]:<15}"
     debug_title = f"{"DEBUG":<15} | {counts["DEBUG"]:<15}"
     print(header, divider, error_title, warning_title, info_title, debug_title + "\n", sep="\n")
+
     level = choose_level()
     if level == "no_level":
         print("")
     elif level in counts:
         print(f"Log details for the {level} level:")
-        logs = load_logs(logs_file_path)
-        for line in logs:
+        for line in load_logs(logs_file_path):
             if level in line.values():
                 print(" ".join(line.values()))
     else:
